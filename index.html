@@ -17,7 +17,7 @@
       <section class="panel">
         <p class="eyebrow">Control Panel</p>
         <h1>Elevator Motion Simulator</h1>
-        <p class="subtitle">Press floor buttons. Mid-route requests in the same direction are handled first.</p>
+        <p class="subtitle">Use hall-call buttons to summon the car, then cabin buttons to choose destination floors.</p>
 
         <div class="stats">
           <div class="stat-card">
@@ -35,8 +35,13 @@
         </div>
 
         <section class="controls">
-          <h2>Floor Buttons</h2>
-          <div class="button-grid" id="floor-buttons"></div>
+          <h2>Cabin Floor Buttons</h2>
+          <div class="cabin-grid" id="cabin-buttons"></div>
+        </section>
+
+        <section class="controls">
+          <h2>Hall Call Buttons</h2>
+          <div class="hall-grid" id="hall-buttons"></div>
         </section>
       </section>
 
@@ -50,7 +55,7 @@
       </section>
     </main>
 
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
   </body>
 </html>
 
