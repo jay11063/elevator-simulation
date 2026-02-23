@@ -76,9 +76,10 @@ export function canPickupMorePassengers(state) {
 }
 
 export function hasRequestsBeyond(state, floor, serviceDir) {
+  const pendingFloors = new Set([...state.cabinRequests, ...state.upCalls, ...state.downCalls]);
+
   if (serviceDir > 0) {
-    const upServiceFloors = new Set([...state.cabinRequests, ...state.upCalls]);
-    for (const level of upServiceFloors) {
+    for (const level of pendingFloors) {
       if (level > floor + FLOOR_EPSILON) {
         return true;
       }
@@ -87,8 +88,7 @@ export function hasRequestsBeyond(state, floor, serviceDir) {
   }
 
   if (serviceDir < 0) {
-    const downServiceFloors = new Set([...state.cabinRequests, ...state.downCalls]);
-    for (const level of downServiceFloors) {
+    for (const level of pendingFloors) {
       if (level < floor - FLOOR_EPSILON) {
         return true;
       }
@@ -238,14 +238,14 @@ export function chooseNextTarget(state, currentFloorFloat, currentDirection) {
       return buildTargetForFloor(state, upAhead[0], UP);
     }
 
+    const deferredDownAbove = pureDownFloors.filter((floor) => floor > currentFloorFloat + FLOOR_EPSILON);
+    if (deferredDownAbove.length > 0) {
+      return buildTargetForFloor(state, deferredDownAbove[deferredDownAbove.length - 1], DOWN);
+    }
+
     const downBelow = downServiceFloors.filter((floor) => floor < currentFloorFloat - FLOOR_EPSILON);
     if (downBelow.length > 0) {
       return buildTargetForFloor(state, downBelow[downBelow.length - 1], DOWN);
-    }
-
-    const deferredDownAbove = pureDownFloors.filter((floor) => floor > currentFloorFloat + FLOOR_EPSILON);
-    if (deferredDownAbove.length > 0) {
-      return buildTargetForFloor(state, deferredDownAbove[0], DOWN);
     }
 
     return chooseNearestTarget(state, currentFloorFloat);
@@ -256,14 +256,14 @@ export function chooseNextTarget(state, currentFloorFloat, currentDirection) {
     return buildTargetForFloor(state, downAhead[downAhead.length - 1], DOWN);
   }
 
+  const deferredUpBelow = pureUpFloors.filter((floor) => floor < currentFloorFloat - FLOOR_EPSILON);
+  if (deferredUpBelow.length > 0) {
+    return buildTargetForFloor(state, deferredUpBelow[0], UP);
+  }
+
   const upAbove = upServiceFloors.filter((floor) => floor > currentFloorFloat + FLOOR_EPSILON);
   if (upAbove.length > 0) {
     return buildTargetForFloor(state, upAbove[0], UP);
-  }
-
-  const deferredUpBelow = pureUpFloors.filter((floor) => floor < currentFloorFloat - FLOOR_EPSILON);
-  if (deferredUpBelow.length > 0) {
-    return buildTargetForFloor(state, deferredUpBelow[deferredUpBelow.length - 1], UP);
   }
 
   return chooseNearestTarget(state, currentFloorFloat);
