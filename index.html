@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elevator Simulation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="panel">
+        <p class="eyebrow">Control Panel</p>
+        <h1>Elevator Motion Simulator</h1>
+        <p class="subtitle">Press floor buttons. Mid-route requests in the same direction are handled first.</p>
+
+        <div class="stats">
+          <div class="stat-card">
+            <span>Current Floor</span>
+            <strong id="current-floor">1</strong>
+          </div>
+          <div class="stat-card">
+            <span>Target Floor</span>
+            <strong id="target-floor">-</strong>
+          </div>
+          <div class="stat-card">
+            <span>Direction</span>
+            <strong id="direction">Idle</strong>
+          </div>
+        </div>
+
+        <section class="controls">
+          <h2>Floor Buttons</h2>
+          <div class="button-grid" id="floor-buttons"></div>
+        </section>
+      </section>
+
+      <section class="building">
+        <div class="shaft" id="shaft">
+          <div class="floors" id="floors"></div>
+          <div class="car" id="car">
+            <span class="car-display" id="car-display">1</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
