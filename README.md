@@ -4,8 +4,8 @@ Web-based elevator simulation project with two separate demos.
 
 ## Live Demos (GitHub Pages)
 
-- Basic elevator simulation: `https://jay11063.github.io/elevator-simulation/`
-- NPC passenger simulation: `https://jay11063.github.io/elevator-simulation/npc-sim.html`
+- Basic elevator simulation: https://jay11063.github.io/elevator-simulation/
+- NPC passenger simulation: https://jay11063.github.io/elevator-simulation/npc-sim.html
 
 ## Simulations
 
